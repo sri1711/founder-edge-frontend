@@ -2,7 +2,10 @@
 
 A high-fidelity, premium waitlist landing page built with Vite + Vanilla CSS. 🚀
 
-## Getting Started
+## 🌐 Live Demo
+The application is live at: [https://founder-edge-73e8c.web.app](https://founder-edge-73e8c.web.app)
+
+## 🚀 Getting Started
 
 1.  **Clone the repository.**
 2.  **Install dependencies:**
@@ -14,13 +17,13 @@ A high-fidelity, premium waitlist landing page built with Vite + Vanilla CSS. �
     npm run dev
     ```
 
-## Backend Connection
+## 🔗 Backend Connection
 The frontend is currently pointing to our live backend on Google Cloud Run:
 `https://founder-edge-backend-593995890672.us-central1.run.app`
 
-## Deployment (Firebase Hosting)
+## 📦 Deployment (Firebase Hosting)
 
-To deploy to your live website:
+To deploy updates to your live website:
 1.  **Build the project:**
     ```bash
     npm run build
@@ -29,3 +32,9 @@ To deploy to your live website:
     ```bash
     firebase deploy --only hosting
     ```
+
+## 🛠 Features
+- **Modern UI**: Glassmorphism design with a dynamic gradient background.
+- **Micro-animations**: Seamless transitions and fade-up effects.
+- **Waitlist Logic**: Real-time validation and deduplication (Email & Mobile).
+- **Share Dashboard**: Post-submission share flow for WhatsApp, Email, and SMS.

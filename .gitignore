@@ -7,12 +7,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Build and Dependencies
 node_modules
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# Editor and System
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -26,4 +27,8 @@ dist-ssr
 # Firebase
 .firebase/
 firebase-debug.log*
-.firebaserc
+firestore-debug.log*
+ui-debug.log*
+.runtimeconfig.json
+
+# Note: we are NOT ignoring .firebaserc as it stores project shortcuts
