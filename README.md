@@ -1,16 +1,31 @@
-# React + Vite
+# Founder Edge Waitlist - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-fidelity, premium waitlist landing page built with Vite + Vanilla CSS. 🚀
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1.  **Clone the repository.**
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Run locally:**
+    ```bash
+    npm run dev
+    ```
 
-## React Compiler
+## Backend Connection
+The frontend is currently pointing to our live backend on Google Cloud Run:
+`https://founder-edge-backend-593995890672.us-central1.run.app`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Deployment (Firebase Hosting)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+To deploy to your live website:
+1.  **Build the project:**
+    ```bash
+    npm run build
+    ```
+2.  **Deploy:**
+    ```bash
+    firebase deploy --only hosting
+    ```
