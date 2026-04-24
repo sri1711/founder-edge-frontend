@@ -1,92 +1,77 @@
 import React, { useState } from 'react';
-import './index.css';
+import './styles/theme.css';
+import Landing from './pages/Landing';
+import Auth from './pages/Auth';
+import Browse from './pages/Browse';
+import Dashboard from './pages/Dashboard';
+import Sidebar from './components/layout/Sidebar';
+import { Toast } from './components/common/Atoms';
 
 function App() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null);
+  const [page, setPage] = useState('landing'); // landing, auth, browse, dashboard
+  const [user, setUser] = useState(null);
+  const [toast, setToast] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus(null);
+  const showToast = (msg, type = 'success') => {
+    setToast({ msg, type });
+  };
 
-    try {
-      // In production, update this to your deployed backend URL.
-      const response = await fetch('http://127.0.0.1:8000/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email }),
-      });
+  const handleLogin = (u) => {
+    setUser(u);
+    setPage('browse');
+    showToast(`Welcome back, ${u.name}!`);
+  };
 
-      const data = await response.json();
+  const navItems = [
+    { id: 'browse', label: 'Browse Mentors', icon: '🔍' },
+    { id: 'dashboard', label: 'My Sessions', icon: '📅' },
+    { id: 'settings', label: 'Settings', icon: '⚙️' },
+  ];
 
-      if (response.ok) {
-        setStatus({ type: 'success', text: data.message || 'You have been added to the waitlist!' });
-        setName('');
-        setEmail('');
-      } else {
-        setStatus({ type: 'error', text: data.detail || 'Failed to join waitlist. Please try again.' });
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus({ type: 'error', text: 'Network connection error. Is the backend running?' });
-    } finally {
-      setLoading(false);
+  const renderPage = () => {
+    switch (page) {
+      case 'landing':
+        return <Landing onNav={setPage} onJoinWaitlist={() => showToast("Success! You're on the list.")} />;
+      case 'auth':
+        return <Auth onLogin={handleLogin} onNav={setPage} />;
+      case 'browse':
+        return <Browse user={user} onBookSuccess={() => showToast("Booking Confirmed!")} />;
+      case 'dashboard':
+        return <Dashboard user={user} />;
+      default:
+        return <div style={{ padding: 100, textAlign: 'center' }}>Coming Soon...</div>;
     }
   };
 
+  const isPlatform = ['browse', 'dashboard', 'settings'].includes(page);
+
   return (
-    <>
-      <div className="blob blob-1"></div>
-      <div className="blob blob-2"></div>
+    <div style={{ minHeight: '100vh', background: 'var(--bgg)' }}>
+      {isPlatform && (
+        <Sidebar
+          items={navItems}
+          active={page}
+          onNav={setPage}
+          user={user}
+        />
+      )}
 
-      <div className="container">
-        <div className="glass-card">
-          <h1>Join the Waitlist</h1>
-          <p className="subtitle">
-            Be the first to experience our next-generation product. Secure your early access spot today.
-          </p>
+      <main style={{
+        marginLeft: isPlatform ? 260 : 0,
+        paddingTop: isPlatform ? 40 : 0,
+        transition: 'margin 0.3s ease'
+      }}>
+        {renderPage()}
+      </main>
 
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Full Name</label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Ex. Jane Doe"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="jane@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-
-            <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? <div className="spinner"></div> : 'Reserve My Spot'}
-            </button>
-          </form>
-
-          {status && (
-            <div className={`status-message ${status.type}`}>
-              {status.text}
-            </div>
-          )}
-        </div>
-      </div>
-    </>
+      {toast && (
+        <Toast
+          msg={toast.msg}
+          type={toast.type}
+          onDone={() => setToast(null)}
+        />
+      )}
+    </div>
   );
 }
 

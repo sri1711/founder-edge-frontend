@@ -1,0 +1,84 @@
+:root {
+    --blu: #2563EB;
+    --blu2: #1D4ED8;
+    --blu3: #1E40AF;
+    --blul: #DBEAFE;
+    --blull: #EFF6FF;
+    --bgg: #F0F7FF;
+    --wht: #FFFFFF;
+    --txt: #1E3A8A;
+    --sub: #4B72BC;
+    --bdr: #BFDBFE;
+    --gr: #10B981;
+    --grl: #D1FAE5;
+    --shd: rgba(37, 99, 235, 0.08);
+    --f: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bgg);
+    color: var(--txt);
+    font-family: var(--f);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.auth-card {
+    background: var(--wht);
+    border-radius: 20px;
+    border: 1px solid var(--bdr);
+    padding: 40px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 10px 30px var(--shd);
+}
+
+.btn-blu {
+    background: var(--blu);
+    color: var(--wht);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-blu:hover {
+    background: var(--blu2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-out {
+    background: transparent;
+    color: var(--blu);
+    border: 1.5px solid var(--blu);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.card {
+    background: var(--wht);
+    border-radius: 16px;
+    border: 1px solid var(--bdr);
+    padding: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--shd);
+}
